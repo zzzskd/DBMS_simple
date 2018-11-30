@@ -29,57 +29,70 @@
 ## 使用命令
 
 ### 登录 
-login root root 
-
+```
+login root root                                                # 登录 
+```
 ### use
-use sdust
-
+```
+use sdust                                                      # 使用数据库
+```
 ### create
-create user zzz passwd 1
-create database sdust
-create table users(id int primary key, name varchar not null)
-create view users_view as select * from users
-
+```
+create user zzz passwd 1                                       # 创建用户
+create database sdust                                          # 创建数据库
+create table users(id int primary key, name varchar not null)  # 创建数据表
+create view users_view as select * from users                  # 创建视图
+```
 ### insert 
-insert into users values(1, 'zzz')
-
-### delete 
-delete from users
-delete from users where id = 1
-
+```
+insert into users values(1, 'zzz')                             # 向表中插入数据
+```
+### delete
+``` 
+delete from users                                              # 删除表中所有数据
+delete from users where id = 1                                 # where 子句
+```
 ### update 
-update users set name = 'zzz'
-update users set id = 3 where name = 'yes'
+```
+update users set name = 'zzz'                                  # 更新表中所有数据
+update users set id = 3 where name = 'yes'                     # where 子句
+```
 
 ### select 
+```
 select * from users 
 select id, name from users 
-select * from users order by id
-select id, name from users_view
+select * from users order by id                                # order by 子句
+select id, name from users_view                                # 在视图中查询
+```
 
 ### grant
-grant insert, select on test to zzz
+```
+grant insert, select on test to zzz                            # 赋予用户权限
 grant * on test, sdust to zzz
 grant * on test, sdust to zzz, test
+```
 
 ### revoke 
-revoke insert, select on test from zzz
+```
+revoke insert, select on test from zzz                         # 收回权限
 revoke * on test, sdust from zzz
 revoke * on test, sdust from zzz, test
+```
 
 ### help
-help database
-help table users
-help view users_view
-
+```
+help database                                                  # 查看数据库信息
+help table users                                               # 查看数据表信息
+help view users_view                                           # 查看试图信息
+```
 ### 退出
+```
 exit
+```
 
 ###  存储用户文件结构
-
-./config/users.json:
-
-{ "user_name": {"password": "user_password", "type": 1} }
+./config/users.json:  { "user_name": {"password": "user_password", "type": 1} }
 
 格式化：
 ```json
@@ -91,6 +104,7 @@ exit
 }
 ```
 ### 存储数据文件结构
+
 ./config/dictionary.json: 
 
 {"sdust": {"views": {"users_view": {"items": [{"nature": "id", "type": "int"}], "content": "select * from users"}}, "permissions": {"root": {"select": 1, "insert": 1, "update": 1, "delete": 1}}, "tables": {"users": {"size": 2, "items": [{"nature": "id", "limit": "primary key", "type": "int"}]}}}}
